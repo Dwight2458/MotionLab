@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Animation Gallery</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/gallery.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Page specific styles */
+    body {
+      background: linear-gradient(135deg, #0a0a0f 0%, #12121a 100%);
+      min-height: 100vh;
+    }
+
+    .page-header {
+      text-align: center;
+      padding: 60px 20px 40px;
+      position: relative;
+    }
+
+    .page-header h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-header p {
+      color: #8888a0;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 24px;
+      padding: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding-bottom: 80px;
+    }
+
+    .gallery-item {
+      background: #12121a;
+      border: 1px solid #2a2a3a;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gallery-item:hover {
+      border-color: #6366f1;
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+    }
+
+    .item-preview {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #1a1a25;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .item-preview::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+    }
+
+    .item-info {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .item-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #e8e8f0;
+      margin-bottom: 8px;
+    }
+
+    .item-desc {
+      font-size: 0.9rem;
+      color: #8888a0;
+      margin-bottom: 16px;
+    }
+
+    /* Code Toggle Button */
+    .code-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: #0a0a0f;
+      border: 1px solid #3a3a4a;
+      border-radius: 8px;
+      color: #b8b8c8;
+      font-size: 0.85rem;
+      cursor: pointer;
+      width: 100%;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .code-toggle:hover {
+      border-color: #6366f1;
+      color: #e8e8f0;
+    }
+
+    .code-toggle:focus {
+      outline: none;
+      border-color: #6366f1;
+      color: #e8e8f0;
+    }
+
+    .code-toggle svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .code-toggle.active svg {
+      transform: rotate(180deg);
+    }
+
+    .code-toggle.active {
+      border-color: #6366f1;
+      color: #6366f1;
+    }
+
+    /* Code Panel */
+    .code-panel {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: max-height 0.4s ease, opacity 0.3s ease, visibility 0.3s;
+      background: #0a0a0f;
+      border-top: 1px solid transparent;
+      position: relative;
+      width: 100%;
+      top: auto;
+      left: auto;
+    }
+
+    .code-panel.open {
+      position: relative;
+      max-height: 600px;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      overflow-y: auto;
+      border-top-color: #2a2a3a;
+      padding-top: 40px;
+    }
+
+    /* Scrollbar for code panel */
+    .code-panel.open::-webkit-scrollbar {
+      width: 6px;
+    }
+    .code-panel.open::-webkit-scrollbar-track {
+      background: #0a0a0f;
+    }
+    .code-panel.open::-webkit-scrollbar-thumb {
+      background: #2a2a3a;
+      border-radius: 3px;
+    }
+    .code-panel.open::-webkit-scrollbar-thumb:hover {
+      background: #6366f1;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 4px 10px;
+      background: #1a1a25;
+      border: 1px solid #3a3a4a;
+      border-radius: 4px;
+      color: #8888a0;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      z-index: 1;
+    }
+
+    .copy-btn:hover {
+      border-color: #6366f1;
+      color: #e8e8f0;
+    }
+
+    .copy-btn.copied {
+      border-color: #10b981;
+      color: #10b981;
+    }
+
+    .code-content {
+      padding: 0 16px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0;
+      color: #8888a0;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .code-content span {
+      font-size: 0.75rem;
+    }
+
+    .code-content .comment { color: #6b7280; }
+    .code-content .selector { color: #f472b6; }
+    .code-content .property { color: #93c5fd; }
+    .code-content .value { color: #a5f3fc; }
+    .code-content .punctuation { color: #e8e8f0; }
+
+    .code-content {
+      user-select: text;
+      cursor: text;
+    }
+  </style>
+</head>
+<body>
+  <!-- Canvas background -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <h1>CSS Animation Gallery</h1>
+    <p>Interactive CSS animation demonstrations with live code preview. Click "View Code" to see the complete source code.</p>
+  </header>
+
+  <!-- Gallery Grid -->
+  <main class="gallery-grid" id="galleryGrid">
+    <!-- Loading Spinner -->
+    <div class="gallery-item" data-animation="loading">
+      <div class="item-preview">
+        <div class="demo-loading">
+          <div class="loading-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <h3 class="item-title">Loading Spinner</h3>
+        <p class="item-desc">Rotating rings with delay</p>
+        <button class="code-toggle" data-target="loading">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+          View Complete Code
+        </button>
+        <div class="code-panel" id="code-loading">
+          <button class="copy-btn" data-target="loading">复制</button>
+          <div class="code-content">
+<span class="comment">/* Loading Spinner CSS */</span>
+<span class="selector">.loading-ring</span> <span class="punctuation">{</span>
+  <span class="property">position</span><span class="punctuation">:</span> <span class="value">relative</span><span class="punctuation">;</span>
+  <span class="property">width</span><span class="punctuation">:</span> <span class="value">60px</span><span class="punctuation">;</span>
+  <span class="property">height</span><span class="punctuation">:</span> <span class="value">60px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.loading-ring div</span> <span class="punctuation">{</span>
+  <span class="property">position</span><span class="punctuation">:</span> <span class="value">absolute</span><span class="punctuation">;</span>
+  <span class="property">width</span><span class="punctuation">:</span> <span class="value">100%</span><span class="punctuation">;</span>
+  <span class="property">height</span><span class="punctuation">:</span> <span class="value">100%</span><span class="punctuation">;</span>
+  <span class="property">border</span><span class="punctuation">:</span> <span class="value">3px solid transparent</span><span class="punctuation">;</span>
+  <span class="property">border-top-color</span><span class="punctuation">:</span> <span class="value">#6366f1</span><span class="punctuation">;</span>
+  <span class="property">border-radius</span><span class="punctuation">:</span> <span class="value">50%</span><span class="punctuation">;</span>
+  <span class="property">animation</span><span class="punctuation">:</span> <span class="value">spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.loading-ring div:nth-child(1)</span> <span class="punctuation">{</span> <span class="property">animation-delay</span><span class="punctuation">:</span> <span class="value">-0.45s</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+<span class="selector">.loading-ring div:nth-child(2)</span> <span class="punctuation">{</span> <span class="property">animation-delay</span><span class="punctuation">:</span> <span class="value">-0.3s</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+<span class="selector">.loading-ring div:nth-child(3)</span> <span class="punctuation">{</span> <span class="property">animation-delay</span><span class="punctuation">:</span> <span class="value">-0.15s</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+<span class="selector">.loading-ring div:nth-child(4)</span> <span class="punctuation">{</span> <span class="property">animation-delay</span><span class="punctuation">:</span> <span class="value">0s</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+
+<span class="selector">@keyframes spin</span> <span class="punctuation">{</span>
+  <span class="selector">0%</span> <span class="punctuation">{</span> <span class="property">transform</span><span class="punctuation">:</span> <span class="value">rotate(0deg)</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+  <span class="selector">100%</span> <span class="punctuation">{</span> <span class="property">transform</span><span class="punctuation">:</span> <span class="value">rotate(360deg)</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+<span class="punctuation">}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pulse Button -->
+    <div class="gallery-item" data-animation="pulse">
+      <div class="item-preview">
+        <button class="demo-pulse-btn">
+          <span>Hover Me</span>
+        </button>
+      </div>
+      <div class="item-info">
+        <h3 class="item-title">Pulse Button</h3>
+        <p class="item-desc">Button with ripple effect</p>
+        <button class="code-toggle" data-target="pulse">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+          View Complete Code
+        </button>
+        <div class="code-panel" id="code-pulse">
+          <button class="copy-btn" data-target="pulse">复制</button>
+          <div class="code-content">
+<span class="comment">/* Pulse Button HTML */</span>
+<span class="punctuation">&lt;</span><span class="selector">button</span> <span class="property">class</span><span class="punctuation">=</span><span class="value">"pulse-btn"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="selector">span</span><span class="punctuation">&gt;</span>Hover Me<span class="punctuation">&lt;/</span><span class="selector">span</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="selector">button</span><span class="punctuation">&gt;</span>
+
+<span class="comment">/* Pulse Button CSS */</span>
+<span class="selector">.demo-pulse-btn</span> <span class="punctuation">{</span>
+  <span class="property">position</span><span class="punctuation">:</span> <span class="value">relative</span><span class="punctuation">;</span>
+  <span class="property">padding</span><span class="punctuation">:</span> <span class="value">12px 28px</span><span class="punctuation">;</span>
+  <span class="property">background</span><span class="punctuation">:</span> <span class="value">linear-gradient(135deg, #6366f1, #8b5cf6)</span><span class="punctuation">;</span>
+  <span class="property">color</span><span class="punctuation">:</span> <span class="value">white</span><span class="punctuation">;</span>
+  <span class="property">border</span><span class="punctuation">:</span> <span class="value">none</span><span class="punctuation">;</span>
+  <span class="property">border-radius</span><span class="punctuation">:</span> <span class="value">8px</span><span class="punctuation">;</span>
+  <span class="property">overflow</span><span class="punctuation">:</span> <span class="value">visible</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.demo-pulse-btn::before</span> <span class="punctuation">{</span>
+  <span class="property">content</span><span class="punctuation">:</span> <span class="value">''</span><span class="punctuation">;</span>
+  <span class="property">position</span><span class="punctuation">:</span> <span class="value">absolute</span><span class="punctuation">;</span>
+  <span class="property">inset</span><span class="punctuation">:</span> <span class="value">-6px</span><span class="punctuation">;</span>
+  <span class="property">border</span><span class="punctuation">:</span> <span class="value">2px solid #6366f1</span><span class="punctuation">;</span>
+  <span class="property">border-radius</span><span class="punctuation">:</span> <span class="value">12px</span><span class="punctuation">;</span>
+  <span class="property">animation</span><span class="punctuation">:</span> <span class="value">pulse-ring 2s ease-out infinite</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">@keyframes pulse-ring</span> <span class="punctuation">{</span>
+  <span class="selector">0%</span> <span class="punctuation">{</span>
+    <span class="property">transform</span><span class="punctuation">:</span> <span class="value">scale(1)</span><span class="punctuation">;</span>
+    <span class="property">opacity</span><span class="punctuation">:</span> <span class="value">1</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+  <span class="selector">100%</span> <span class="punctuation">{</span>
+    <span class="property">transform</span><span class="punctuation">:</span> <span class="value">scale(1.3)</span><span class="punctuation">;</span>
+    <span class="property">opacity</span><span class="punctuation">:</span> <span class="value">0</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flip Card -->
+    <div class="gallery-item" data-animation="flip">
+      <div class="item-preview">
+        <div class="demo-flip">
+          <div class="flip-card">
+            <div class="flip-inner">
+              <div class="flip-front">Hover Me</div>
+              <div class="flip-back">CSS Flip!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <h3 class="item-title">3D Flip Card</h3>
+        <p class="item-desc">3D transform with preserve-3d</p>
+        <button class="code-toggle" data-target="flip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+          View Complete Code
+        </button>
+        <div class="code-panel" id="code-flip">
+          <button class="copy-btn" data-target="flip">复制</button>
+          <div class="code-content">
+<span class="comment">/* Flip Card HTML */</span>
+<span class="punctuation">&lt;</span><span class="selector">div</span> <span class="property">class</span><span class="punctuation">=</span><span class="value">"flip-card"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="selector">div</span> <span class="property">class</span><span class="punctuation">=</span><span class="value">"flip-inner"</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="selector">div</span> <span class="property">class</span><span class="punctuation">=</span><span class="value">"flip-front"</span><span class="punctuation">&gt;</span>Hover Me<span class="punctuation">&lt;/</span><span class="selector">div</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="selector">div</span> <span class="property">class</span><span class="punctuation">=</span><span class="value">"flip-back"</span><span class="punctuation">&gt;</span>CSS Flip!<span class="punctuation">&lt;/</span><span class="selector">div</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;/</span><span class="selector">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="selector">div</span><span class="punctuation">&gt;</span>
+
+<span class="comment">/* Flip Card CSS */</span>
+<span class="selector">.flip-card</span> <span class="punctuation">{</span>
+  <span class="property">perspective</span><span class="punctuation">:</span> <span class="value">1000px</span><span class="punctuation">;</span>
+  <span class="property">width</span><span class="punctuation">:</span> <span class="value">120px</span><span class="punctuation">;</span>
+  <span class="property">height</span><span class="punctuation">:</span> <span class="value">150px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.flip-inner</span> <span class="punctuation">{</span>
+  <span class="property">position</span><span class="punctuation">:</span> <span class="value">relative</span><span class="punctuation">;</span>
+  <span class="property">width</span><span class="punctuation">:</span> <span class="value">100%</span><span class="punctuation">;</span>
+  <span class="property">height</span><span class="punctuation">:</span> <span class="value">100%</span><span class="punctuation">;</span>
+  <span class="property">transition</span><span class="punctuation">:</span> <span class="value">transform 0.8s</span><span class="punctuation">;</span>
+  <span class="property">transform-style</span><span class="punctuation">:</span> <span class="value">preserve-3d</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.flip-card:hover .flip-inner</span> <span class="punctuation">{</span>
+  <span class="property">transform</span><span class="punctuation">:</span> <span class="value">rotateY(180deg)</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.flip-front, .flip-back</span> <span class="punctuation">{</span>
+  <span class="property">position</span><span class="punctuation">:</span> <span class="value">absolute</span><span class="punctuation">;</span>
+  <span class="property">width</span><span class="punctuation">:</span> <span class="value">100%</span><span class="punctuation">;</span>
+  <span class="property">height</span><span class="punctuation">:</span> <span class="value">100%</span><span class="punctuation">;</span>
+  <span class="property">backface-visibility</span><span class="punctuation">:</span> <span class="value">hidden</span><span class="punctuation">;</span>
+  <span class="property">border-radius</span><span class="punctuation">:</span> <span class="value">12px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.flip-back</span> <span class="punctuation">{</span>
+  <span class="property">transform</span><span class="punctuation">:</span> <span class="value">rotateY(180deg)</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Glowing Text -->
+    <div class="gallery-item" data-animation="glow">
+      <div class="item-preview">
+        <div class="demo-glow">
+          <span class="glow-text">CSS</span>
+        </div>
+      </div>
+      <div class="item-info">
+        <h3 class="item-title">Neon Glow</h3>
+        <p class="item-desc">Text shadow animation</p>
+        <button class="code-toggle" data-target="glow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+          View Complete Code
+        </button>
+        <div class="code-panel" id="code-glow">
+          <button class="copy-btn" data-target="glow">复制</button>
+          <div class="code-content">
+<span class="comment">/* Neon Glow HTML */</span>
+<span class="punctuation">&lt;</span><span class="selector">span</span> <span class="property">class</span><span class="punctuation">=</span><span class="value">"glow-text"</span><span class="punctuation">&gt;</span>CSS<span class="punctuation">&lt;/</span><span class="selector">span</span><span class="punctuation">&gt;</span>
+
+<span class="comment">/* Neon Glow CSS */</span>
+<span class="selector">.glow-text</span> <span class="punctuation">{</span>
+  <span class="property">font-size</span><span class="punctuation">:</span> <span class="value">2.5rem</span><span class="punctuation">;</span>
+  <span class="property">font-weight</span><span class="punctuation">:</span> <span class="value">700</span><span class="punctuation">;</span>
+  <span class="property">color</span><span class="punctuation">:</span> <span class="value">#6366f1</span><span class="punctuation">;</span>
+  <span class="property">animation</span><span class="punctuation">:</span> <span class="value">glow 2s ease-in-out infinite</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">@keyframes glow</span> <span class="punctuation">{</span>
+  <span class="selector">0%, 100%</span> <span class="punctuation">{</span>
+    <span class="property">text-shadow</span><span class="punctuation">:</span>
+      <span class="value">0 0 10px #6366f1</span><span class="punctuation">,</span>
+      <span class="value">0 0 20px #6366f1</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+  <span class="selector">50%</span> <span class="punctuation">{</span>
+    <span class="property">text-shadow</span><span class="punctuation">:</span>
+      <span class="value">0 0 20px #6366f1</span><span class="punctuation">,</span>
+      <span class="value">0 0 40px #6366f1</span><span class="punctuation">,</span>
+      <span class="value">0 0 60px #8b5cf6</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Morphing Blob -->
+    <div class="gallery-item" data-animation="blob">
+      <div class="item-preview">
+        <div class="demo-blob"></div>
+      </div>
+      <div class="item-info">
+        <h3 class="item-title">Morphing Blob</h3>
+        <p class="item-desc">Fluid border-radius animation</p>
+        <button class="code-toggle" data-target="blob">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+          View Complete Code
+        </button>
+        <div class="code-panel" id="code-blob">
+          <button class="copy-btn" data-target="blob">复制</button>
+          <div class="code-content">
+<span class="comment">/* Morphing Blob HTML */</span>
+<span class="punctuation">&lt;</span><span class="selector">div</span> <span class="property">class</span><span class="punctuation">=</span><span class="value">"demo-blob"</span><span class="punctuation">&gt;&lt;/</span><span class="selector">div</span><span class="punctuation">&gt;</span>
+
+<span class="comment">/* Morphing Blob CSS */</span>
+<span class="selector">.demo-blob</span> <span class="punctuation">{</span>
+  <span class="property">width</span><span class="punctuation">:</span> <span class="value">100px</span><span class="punctuation">;</span>
+  <span class="property">height</span><span class="punctuation">:</span> <span class="value">100px</span><span class="punctuation">;</span>
+  <span class="property">background</span><span class="punctuation">:</span> <span class="value">linear-gradient(135deg, #6366f1, #8b5cf6)</span><span class="punctuation">;</span>
+  <span class="property">animation</span><span class="punctuation">:</span> <span class="value">morph 6s ease-in-out infinite</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">@keyframes morph</span> <span class="punctuation">{</span>
+  <span class="selector">0%, 100%</span> <span class="punctuation">{</span>
+    <span class="property">border-radius</span><span class="punctuation">:</span>
+      <span class="value">60% 40% 30% 70% / 60% 30% 70% 40%</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+  <span class="selector">50%</span> <span class="punctuation">{</span>
+    <span class="property">border-radius</span><span class="punctuation">:</span>
+      <span class="value">30% 60% 70% 40% / 50% 60% 30% 60%</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bounce -->
+    <div class="gallery-item" data-animation="bounce">
+      <div class="item-preview">
+        <div class="demo-bounce"></div>
+      </div>
+      <div class="item-info">
+        <h3 class="item-title">Bounce</h3>
+        <p class="item-desc">Elastic bounce effect</p>
+        <button class="code-toggle" data-target="bounce">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+          View Complete Code
+        </button>
+        <div class="code-panel" id="code-bounce">
+          <button class="copy-btn" data-target="bounce">复制</button>
+          <div class="code-content">
+<span class="comment">/* Bounce HTML */</span>
+<span class="punctuation">&lt;</span><span class="selector">div</span> <span class="property">class</span><span class="punctuation">=</span><span class="value">"demo-bounce"</span><span class="punctuation">&gt;&lt;/</span><span class="selector">div</span><span class="punctuation">&gt;</span>
+
+<span class="comment">/* Bounce CSS */</span>
+<span class="selector">.demo-bounce</span> <span class="punctuation">{</span>
+  <span class="property">width</span><span class="punctuation">:</span> <span class="value">60px</span><span class="punctuation">;</span>
+  <span class="property">height</span><span class="punctuation">:</span> <span class="value">60px</span><span class="punctuation">;</span>
+  <span class="property">background</span><span class="punctuation">:</span> <span class="value">linear-gradient(135deg, #6366f1, #8b5cf6)</span><span class="punctuation">;</span>
+  <span class="property">border-radius</span><span class="punctuation">:</span> <span class="value">12px</span><span class="punctuation">;</span>
+  <span class="property">animation</span><span class="punctuation">:</span> <span class="value">bounce-demo 0.6s ease infinite</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">@keyframes bounce-demo</span> <span class="punctuation">{</span>
+  <span class="selector">0%, 100%</span> <span class="punctuation">{</span> <span class="property">transform</span><span class="punctuation">:</span> <span class="value">translateY(0)</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+  <span class="selector">50%</span> <span class="punctuation">{</span> <span class="property">transform</span><span class="punctuation">:</span> <span class="value">translateY(-30px)</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+<span class="punctuation">}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wave -->
+    <div class="gallery-item" data-animation="wave">
+      <div class="item-preview">
+        <div class="demo-wave">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="item-info">
+        <h3 class="item-title">Wave Loader</h3>
+        <p class="item-desc">Staggered dots animation</p>
+        <button class="code-toggle" data-target="wave">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+          View Complete Code
+        </button>
+        <div class="code-panel" id="code-wave">
+          <button class="copy-btn" data-target="wave">复制</button>
+          <div class="code-content">
+<span class="comment">/* Wave Loader HTML */</span>
+<span class="punctuation">&lt;</span><span class="selector">div</span> <span class="property">class</span><span class="punctuation">=</span><span class="value">"demo-wave"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="selector">span</span><span class="punctuation">&gt;&lt;/</span><span class="selector">span</span><span class="punctuation">&gt;</span>...<span class="punctuation">&lt;/</span><span class="selector">div</span><span class="punctuation">&gt;</span>
+
+<span class="comment">/* Wave Loader CSS */</span>
+<span class="selector">.demo-wave</span> <span class="punctuation">{</span>
+  <span class="property">display</span><span class="punctuation">:</span> <span class="value">flex</span><span class="punctuation">;</span>
+  <span class="property">gap</span><span class="punctuation">:</span> <span class="value">6px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.demo-wave span</span> <span class="punctuation">{</span>
+  <span class="property">width</span><span class="punctuation">:</span> <span class="value">10px</span><span class="punctuation">;</span>
+  <span class="property">height</span><span class="punctuation">:</span> <span class="value">10px</span><span class="punctuation">;</span>
+  <span class="property">background</span><span class="punctuation">:</span> <span class="value">#6366f1</span><span class="punctuation">;</span>
+  <span class="property">border-radius</span><span class="punctuation">:</span> <span class="value">50%</span><span class="punctuation">;</span>
+  <span class="property">animation</span><span class="punctuation">:</span> <span class="value">wave 1s ease-in-out infinite</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.demo-wave span:nth-child(1)</span> <span class="punctuation">{</span> <span class="property">animation-delay</span><span class="punctuation">:</span> <span class="value">0s</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+<span class="selector">.demo-wave span:nth-child(2)</span> <span class="punctuation">{</span> <span class="property">animation-delay</span><span class="punctuation">:</span> <span class="value">0.1s</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+<span class="selector">.demo-wave span:nth-child(3)</span> <span class="punctuation">{</span> <span class="property">animation-delay</span><span class="punctuation">:</span> <span class="value">0.2s</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+<span class="selector">.demo-wave span:nth-child(4)</span> <span class="punctuation">{</span> <span class="property">animation-delay</span><span class="punctuation">:</span> <span class="value">0.3s</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+<span class="selector">.demo-wave span:nth-child(5)</span> <span class="punctuation">{</span> <span class="property">animation-delay</span><span class="punctuation">:</span> <span class="value">0.4s</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+
+<span class="selector">@keyframes wave</span> <span class="punctuation">{</span>
+  <span class="selector">0%, 80%, 100%</span> <span class="punctuation">{</span>
+    <span class="property">transform</span><span class="punctuation">:</span> <span class="value">scale(0)</span><span class="punctuation">;</span>
+    <span class="property">opacity</span><span class="punctuation">:</span> <span class="value">0.5</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+  <span class="selector">40%</span> <span class="punctuation">{</span>
+    <span class="property">transform</span><span class="punctuation">:</span> <span class="value">scale(1)</span><span class="punctuation">;</span>
+    <span class="property">opacity</span><span class="punctuation">:</span> <span class="value">1</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Heartbeat -->
+    <div class="gallery-item" data-animation="heart">
+      <div class="item-preview">
+        <div class="demo-heart">
+          <svg viewBox="0 0 24 24" class="heart-svg">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="url(#heartGradient)"/>
+            <defs>
+              <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f472b6"/>
+                <stop offset="100%" stop-color="#fb7185"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+      <div class="item-info">
+        <h3 class="item-title">Heartbeat</h3>
+        <p class="item-desc">Rhythmic scaling</p>
+        <button class="code-toggle" data-target="heart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+          View Complete Code
+        </button>
+        <div class="code-panel" id="code-heart">
+          <button class="copy-btn" data-target="heart">复制</button>
+          <div class="code-content">
+<span class="comment">/* Heartbeat HTML */</span>
+<span class="punctuation">&lt;</span><span class="selector">div</span> <span class="property">class</span><span class="punctuation">=</span><span class="value">"demo-heart"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="selector">svg</span> <span class="property">viewBox</span><span class="punctuation">=</span><span class="value">"0 0 24 24"</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="selector">path</span> <span class="property">d</span><span class="punctuation">=</span><span class="value">"..."</span> <span class="property">fill</span><span class="punctuation">=</span><span class="value">"url(#gradient)"</span><span class="punctuation">/&gt;</span>
+  <span class="punctuation">&lt;/</span><span class="selector">svg</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="selector">div</span><span class="punctuation">&gt;</span>
+
+<span class="comment">/* Heartbeat CSS */</span>
+<span class="selector">.demo-heart</span> <span class="punctuation">{</span>
+  <span class="property">width</span><span class="punctuation">:</span> <span class="value">48px</span><span class="punctuation">;</span>
+  <span class="property">height</span><span class="punctuation">:</span> <span class="value">48px</span><span class="punctuation">;</span>
+  <span class="property">animation</span><span class="punctuation">:</span> <span class="value">heartbeat 1s ease-in-out infinite</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">@keyframes heartbeat</span> <span class="punctuation">{</span>
+  <span class="selector">0%, 100%</span> <span class="punctuation">{</span> <span class="property">transform</span><span class="punctuation">:</span> <span class="value">scale(1)</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+  <span class="selector">15%</span> <span class="punctuation">{</span> <span class="property">transform</span><span class="punctuation">:</span> <span class="value">scale(1.15)</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+  <span class="selector">30%</span> <span class="punctuation">{</span> <span class="property">transform</span><span class="punctuation">:</span> <span class="value">scale(1)</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+  <span class="selector">45%</span> <span class="punctuation">{</span> <span class="property">transform</span><span class="punctuation">:</span> <span class="value">scale(1.15)</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+  <span class="selector">60%</span> <span class="punctuation">{</span> <span class="property">transform</span><span class="punctuation">:</span> <span class="value">scale(1)</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+<span class="punctuation">}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="scripts/gallery.js"></script>
+  <script>
+    // Code toggle functionality
+    document.querySelectorAll('.code-toggle').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent event bubbling
+        const target = btn.dataset.target;
+        const panel = document.getElementById('code-' + target);
+        const isOpen = panel.classList.contains('open');
+
+        // Close all panels
+        document.querySelectorAll('.code-panel').forEach(p => p.classList.remove('open'));
+        document.querySelectorAll('.code-toggle').forEach(b => b.classList.remove('active'));
+
+        // Open target panel if it was closed
+        if (!isOpen) {
+          panel.classList.add('open');
+          btn.classList.add('active');
+        }
+      });
+    });
+
+    // Close panel when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.code-toggle') && !e.target.closest('.code-panel')) {
+        document.querySelectorAll('.code-panel').forEach(p => p.classList.remove('open'));
+        document.querySelectorAll('.code-toggle').forEach(b => b.classList.remove('active'));
+      }
+    });
+
+    // Prevent clicks inside the panel from closing it
+    document.querySelectorAll('.code-panel').forEach(panel => {
+      panel.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    });
+
+    // Copy code functionality
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const target = btn.dataset.target;
+        const panel = document.getElementById('code-' + target);
+        const codeContent = panel.querySelector('.code-content');
+
+        // Extract text from code content and remove leading/trailing empty lines
+        let textToCopy = codeContent.innerText.trimStart();
+
+        // Copy to clipboard
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          // Visual feedback
+          btn.textContent = '已复制';
+          btn.classList.add('copied');
+
+          // Reset after 2 seconds
+          setTimeout(() => {
+            btn.textContent = '复制';
+            btn.classList.remove('copied');
+          }, 2000);
+        }).catch(err => {
+          console.error('Failed to copy:', err);
+          btn.textContent = '失败';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
