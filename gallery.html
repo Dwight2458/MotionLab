@@ -6,14 +6,18 @@
   <title>CSS Animation Gallery</title>
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/gallery.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    /* System font stack - no external fonts needed */
+    :root {
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      --font-mono: 'SF Mono', 'Fira Code', Consolas, 'Liberation Mono', Menlo, monospace;
+    }
+
     /* Page specific styles */
     body {
       background: linear-gradient(135deg, #0a0a0f 0%, #12121a 100%);
       min-height: 100vh;
+      font-family: var(--font-sans);
     }
 
     .page-header {
@@ -214,7 +218,7 @@
 
     .code-content {
       padding: 0 16px 16px;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 0;
       color: #8888a0;
       line-height: 1.6;
@@ -269,10 +273,39 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
-          View Complete Code
+          View CSS Code
         </button>
-        <div class="code-panel" id="code-loading">
-          <button class="copy-btn" data-target="loading">复制</button>
+        <div class="code-panel" id="code-loading" data-html="<div class=&quot;loading-ring&quot;>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>" data-css=".loading-ring {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.loading-ring div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 3px solid transparent;
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+.loading-ring div:nth-child(1) { animation-delay: -0.45s; }
+.loading-ring div:nth-child(2) { animation-delay: -0.3s; }
+.loading-ring div:nth-child(3) { animation-delay: -0.15s; }
+.loading-ring div:nth-child(4) { animation-delay: 0s; }
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}">
+          <button class="copy-btn" data-target="loading">Copy Complete Code</button>
           <div class="code-content">
 <span class="comment">/* Loading Spinner CSS */</span>
 <span class="selector">.loading-ring</span> <span class="punctuation">{</span>
@@ -319,18 +352,44 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
-          View Complete Code
+          View CSS Code
         </button>
-        <div class="code-panel" id="code-pulse">
-          <button class="copy-btn" data-target="pulse">复制</button>
-          <div class="code-content">
-<span class="comment">/* Pulse Button HTML */</span>
-<span class="punctuation">&lt;</span><span class="selector">button</span> <span class="property">class</span><span class="punctuation">=</span><span class="value">"pulse-btn"</span><span class="punctuation">&gt;</span>
-  <span class="punctuation">&lt;</span><span class="selector">span</span><span class="punctuation">&gt;</span>Hover Me<span class="punctuation">&lt;/</span><span class="selector">span</span><span class="punctuation">&gt;</span>
-<span class="punctuation">&lt;/</span><span class="selector">button</span><span class="punctuation">&gt;</span>
+        <div class="code-panel" id="code-pulse" data-html="<button class=&quot;pulse-btn&quot;>
+  <span>Hover Me</span>
+</button>" data-css=".pulse-btn {
+  position: relative;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  overflow: visible;
+  cursor: pointer;
+}
 
+.pulse-btn::before {
+  content: &quot;&quot;;
+  position: absolute;
+  inset: -6px;
+  border: 2px solid #6366f1;
+  border-radius: 12px;
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}">
+          <button class="copy-btn" data-target="pulse">Copy Complete Code</button>
+          <div class="code-content">
 <span class="comment">/* Pulse Button CSS */</span>
-<span class="selector">.demo-pulse-btn</span> <span class="punctuation">{</span>
+<span class="selector">.pulse-btn</span> <span class="punctuation">{</span>
   <span class="property">position</span><span class="punctuation">:</span> <span class="value">relative</span><span class="punctuation">;</span>
   <span class="property">padding</span><span class="punctuation">:</span> <span class="value">12px 28px</span><span class="punctuation">;</span>
   <span class="property">background</span><span class="punctuation">:</span> <span class="value">linear-gradient(135deg, #6366f1, #8b5cf6)</span><span class="punctuation">;</span>
@@ -383,20 +442,56 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
-          View Complete Code
+          View CSS Code
         </button>
-        <div class="code-panel" id="code-flip">
-          <button class="copy-btn" data-target="flip">复制</button>
-          <div class="code-content">
-<span class="comment">/* Flip Card HTML */</span>
-<span class="punctuation">&lt;</span><span class="selector">div</span> <span class="property">class</span><span class="punctuation">=</span><span class="value">"flip-card"</span><span class="punctuation">&gt;</span>
-  <span class="punctuation">&lt;</span><span class="selector">div</span> <span class="property">class</span><span class="punctuation">=</span><span class="value">"flip-inner"</span><span class="punctuation">&gt;</span>
-    <span class="punctuation">&lt;</span><span class="selector">div</span> <span class="property">class</span><span class="punctuation">=</span><span class="value">"flip-front"</span><span class="punctuation">&gt;</span>Hover Me<span class="punctuation">&lt;/</span><span class="selector">div</span><span class="punctuation">&gt;</span>
-    <span class="punctuation">&lt;</span><span class="selector">div</span> <span class="property">class</span><span class="punctuation">=</span><span class="value">"flip-back"</span><span class="punctuation">&gt;</span>CSS Flip!<span class="punctuation">&lt;/</span><span class="selector">div</span><span class="punctuation">&gt;</span>
-  <span class="punctuation">&lt;/</span><span class="selector">div</span><span class="punctuation">&gt;</span>
-<span class="punctuation">&lt;/</span><span class="selector">div</span><span class="punctuation">&gt;</span>
+        <div class="code-panel" id="code-flip" data-html="<div class=&quot;flip-card&quot;>
+  <div class=&quot;flip-inner&quot;>
+    <div class=&quot;flip-front&quot;>Hover Me</div>
+    <div class=&quot;flip-back&quot;>CSS Flip!</div>
+  </div>
+</div>" data-css=".flip-card {
+  perspective: 1000px;
+  width: 120px;
+  height: 150px;
+}
 
-<span class="comment">/* Flip Card CSS */</span>
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front, .flip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.flip-front {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+}
+
+.flip-back {
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  color: white;
+  transform: rotateY(180deg);
+}">
+          <button class="copy-btn" data-target="flip">Copy Complete Code</button>
+          <div class="code-content">
+<span class="comment">/* 3D Flip Card CSS */</span>
 <span class="selector">.flip-card</span> <span class="punctuation">{</span>
   <span class="property">perspective</span><span class="punctuation">:</span> <span class="value">1000px</span><span class="punctuation">;</span>
   <span class="property">width</span><span class="punctuation">:</span> <span class="value">120px</span><span class="punctuation">;</span>
@@ -445,14 +540,30 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
-          View Complete Code
+          View CSS Code
         </button>
-        <div class="code-panel" id="code-glow">
-          <button class="copy-btn" data-target="glow">复制</button>
-          <div class="code-content">
-<span class="comment">/* Neon Glow HTML */</span>
-<span class="punctuation">&lt;</span><span class="selector">span</span> <span class="property">class</span><span class="punctuation">=</span><span class="value">"glow-text"</span><span class="punctuation">&gt;</span>CSS<span class="punctuation">&lt;/</span><span class="selector">span</span><span class="punctuation">&gt;</span>
+        <div class="code-panel" id="code-glow" data-html="<span class=&quot;glow-text&quot;>CSS</span>" data-css=".glow-text {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #6366f1;
+  animation: glow 2s ease-in-out infinite;
+}
 
+@keyframes glow {
+  0%, 100% {
+    text-shadow:
+      0 0 10px #6366f1,
+      0 0 20px #6366f1;
+  }
+  50% {
+    text-shadow:
+      0 0 20px #6366f1,
+      0 0 40px #6366f1,
+      0 0 60px #8b5cf6;
+  }
+}">
+          <button class="copy-btn" data-target="glow">Copy Complete Code</button>
+          <div class="code-content">
 <span class="comment">/* Neon Glow CSS */</span>
 <span class="selector">.glow-text</span> <span class="punctuation">{</span>
   <span class="property">font-size</span><span class="punctuation">:</span> <span class="value">2.5rem</span><span class="punctuation">;</span>
@@ -491,14 +602,25 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
-          View Complete Code
+          View CSS Code
         </button>
-        <div class="code-panel" id="code-blob">
-          <button class="copy-btn" data-target="blob">复制</button>
-          <div class="code-content">
-<span class="comment">/* Morphing Blob HTML */</span>
-<span class="punctuation">&lt;</span><span class="selector">div</span> <span class="property">class</span><span class="punctuation">=</span><span class="value">"demo-blob"</span><span class="punctuation">&gt;&lt;/</span><span class="selector">div</span><span class="punctuation">&gt;</span>
+        <div class="code-panel" id="code-blob" data-html="<div class=&quot;demo-blob&quot;></div>" data-css=".demo-blob {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  animation: morph 6s ease-in-out infinite;
+}
 
+@keyframes morph {
+  0%, 100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  50% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+}">
+          <button class="copy-btn" data-target="blob">Copy Complete Code</button>
+          <div class="code-content">
 <span class="comment">/* Morphing Blob CSS */</span>
 <span class="selector">.demo-blob</span> <span class="punctuation">{</span>
   <span class="property">width</span><span class="punctuation">:</span> <span class="value">100px</span><span class="punctuation">;</span>
@@ -534,14 +656,22 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
-          View Complete Code
+          View CSS Code
         </button>
-        <div class="code-panel" id="code-bounce">
-          <button class="copy-btn" data-target="bounce">复制</button>
-          <div class="code-content">
-<span class="comment">/* Bounce HTML */</span>
-<span class="punctuation">&lt;</span><span class="selector">div</span> <span class="property">class</span><span class="punctuation">=</span><span class="value">"demo-bounce"</span><span class="punctuation">&gt;&lt;/</span><span class="selector">div</span><span class="punctuation">&gt;</span>
+        <div class="code-panel" id="code-bounce" data-html="<div class=&quot;demo-bounce&quot;></div>" data-css=".demo-bounce {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border-radius: 12px;
+  animation: bounce-demo 0.6s ease infinite;
+}
 
+@keyframes bounce-demo {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-30px); }
+}">
+          <button class="copy-btn" data-target="bounce">Copy Complete Code</button>
+          <div class="code-content">
 <span class="comment">/* Bounce CSS */</span>
 <span class="selector">.demo-bounce</span> <span class="punctuation">{</span>
   <span class="property">width</span><span class="punctuation">:</span> <span class="value">60px</span><span class="punctuation">;</span>
@@ -574,15 +704,45 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
-          View Complete Code
+          View CSS Code
         </button>
-        <div class="code-panel" id="code-wave">
-          <button class="copy-btn" data-target="wave">复制</button>
-          <div class="code-content">
-<span class="comment">/* Wave Loader HTML */</span>
-<span class="punctuation">&lt;</span><span class="selector">div</span> <span class="property">class</span><span class="punctuation">=</span><span class="value">"demo-wave"</span><span class="punctuation">&gt;</span>
-  <span class="punctuation">&lt;</span><span class="selector">span</span><span class="punctuation">&gt;&lt;/</span><span class="selector">span</span><span class="punctuation">&gt;</span>...<span class="punctuation">&lt;/</span><span class="selector">div</span><span class="punctuation">&gt;</span>
+        <div class="code-panel" id="code-wave" data-html="<div class=&quot;demo-wave&quot;>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>" data-css=".demo-wave {
+  display: flex;
+  gap: 6px;
+}
 
+.demo-wave span {
+  width: 10px;
+  height: 10px;
+  background: #6366f1;
+  border-radius: 50%;
+  animation: wave 1s ease-in-out infinite;
+}
+
+.demo-wave span:nth-child(1) { animation-delay: 0s; }
+.demo-wave span:nth-child(2) { animation-delay: 0.1s; }
+.demo-wave span:nth-child(3) { animation-delay: 0.2s; }
+.demo-wave span:nth-child(4) { animation-delay: 0.3s; }
+.demo-wave span:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes wave {
+  0%, 80%, 100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}">
+          <button class="copy-btn" data-target="wave">Copy Complete Code</button>
+          <div class="code-content">
 <span class="comment">/* Wave Loader CSS */</span>
 <span class="selector">.demo-wave</span> <span class="punctuation">{</span>
   <span class="property">display</span><span class="punctuation">:</span> <span class="value">flex</span><span class="punctuation">;</span>
@@ -640,18 +800,27 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
-          View Complete Code
+          View CSS Code
         </button>
-        <div class="code-panel" id="code-heart">
-          <button class="copy-btn" data-target="heart">复制</button>
-          <div class="code-content">
-<span class="comment">/* Heartbeat HTML */</span>
-<span class="punctuation">&lt;</span><span class="selector">div</span> <span class="property">class</span><span class="punctuation">=</span><span class="value">"demo-heart"</span><span class="punctuation">&gt;</span>
-  <span class="punctuation">&lt;</span><span class="selector">svg</span> <span class="property">viewBox</span><span class="punctuation">=</span><span class="value">"0 0 24 24"</span><span class="punctuation">&gt;</span>
-    <span class="punctuation">&lt;</span><span class="selector">path</span> <span class="property">d</span><span class="punctuation">=</span><span class="value">"..."</span> <span class="property">fill</span><span class="punctuation">=</span><span class="value">"url(#gradient)"</span><span class="punctuation">/&gt;</span>
-  <span class="punctuation">&lt;/</span><span class="selector">svg</span><span class="punctuation">&gt;</span>
-<span class="punctuation">&lt;/</span><span class="selector">div</span><span class="punctuation">&gt;</span>
+        <div class="code-panel" id="code-heart" data-html="<div class=&quot;demo-heart&quot;>
+  <svg viewBox=&quot;0 0 24 24&quot; width=&quot;48&quot; height=&quot;48&quot;>
+    <path d=&quot;M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z&quot; fill=&quot;#f472b6&quot;/>
+  </svg>
+</div>" data-css=".demo-heart {
+  width: 48px;
+  height: 48px;
+  animation: heartbeat 1s ease-in-out infinite;
+}
 
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.15); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.15); }
+  60% { transform: scale(1); }
+}">
+          <button class="copy-btn" data-target="heart">Copy Complete Code</button>
+          <div class="code-content">
 <span class="comment">/* Heartbeat CSS */</span>
 <span class="selector">.demo-heart</span> <span class="punctuation">{</span>
   <span class="property">width</span><span class="punctuation">:</span> <span class="value">48px</span><span class="punctuation">;</span>
@@ -709,19 +878,44 @@
       });
     });
 
-    // Copy code functionality
+    // Copy code functionality - generates complete HTML file
     document.querySelectorAll('.copy-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const target = btn.dataset.target;
         const panel = document.getElementById('code-' + target);
-        const codeContent = panel.querySelector('.code-content');
 
-        // Extract text from code content and remove leading/trailing empty lines
-        let textToCopy = codeContent.innerText.trimStart();
+        // Get raw code from data attributes
+        const htmlCode = panel.dataset.html || '';
+        const cssCode = panel.dataset.css || '';
+
+        // Generate complete HTML template
+        const template = `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Animation Demo</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: #1a1a25;
+    }
+
+${cssCode}
+  </style>
+</head>
+<body>
+${htmlCode}
+</body>
+</html>`;
 
         // Copy to clipboard
-        navigator.clipboard.writeText(textToCopy).then(() => {
+        navigator.clipboard.writeText(template).then(() => {
           // Visual feedback
           btn.textContent = '已复制';
           btn.classList.add('copied');

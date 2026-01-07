@@ -1,0 +1,21 @@
+/* Neon Glow - CSS Animation Gallery */
+.glow-text {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #6366f1;
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow:
+      0 0 10px #6366f1,
+      0 0 20px #6366f1;
+  }
+  50% {
+    text-shadow:
+      0 0 20px #6366f1,
+      0 0 40px #6366f1,
+      0 0 60px #8b5cf6;
+  }
+}
