@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MotionLab - CSS Animation Gallery</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    :root {
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      --font-mono: 'SF Mono', 'Fira Code', Consolas, 'Liberation Mono', Menlo, monospace;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0a0a0f 0%, #12121a 100%);
+      min-height: 100vh;
+      font-family: var(--font-sans);
+      color: #e8e8f0;
+      overflow-x: hidden;
+    }
+
+    .landing-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .logo {
+      font-size: clamp(3rem, 10vw, 6rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+    }
+
+    .tagline {
+      font-size: 1.25rem;
+      color: #8888a0;
+      margin-bottom: 48px;
+      max-width: 500px;
+    }
+
+    .nav-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+      max-width: 800px;
+    }
+
+    .nav-card {
+      background: #12121a;
+      border: 1px solid #2a2a3a;
+      border-radius: 16px;
+      padding: 32px 48px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+      min-width: 200px;
+    }
+
+    .nav-card:hover {
+      border-color: #6366f1;
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+    }
+
+    .nav-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #e8e8f0;
+    }
+
+    .nav-card p {
+      font-size: 0.9rem;
+      color: #8888a0;
+    }
+
+    .nav-card .icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .features {
+      margin-top: 80px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+    }
+
+    .feature {
+      text-align: center;
+      padding: 20px;
+      max-width: 200px;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 1.5rem;
+    }
+
+    .feature h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #e8e8f0;
+    }
+
+    .feature p {
+      font-size: 0.85rem;
+      color: #8888a0;
+      line-height: 1.5;
+    }
+
+    .footer {
+      margin-top: 80px;
+      color: #555570;
+      font-size: 0.85rem;
+    }
+
+    .lang-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 600px) {
+      .nav-cards {
+        flex-direction: column;
+      }
+
+      .nav-card {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="landing-container">
+    <span class="lang-badge">English (United States)</span>
+    <h1 class="logo">MotionLab</h1>
+    <p class="tagline">Interactive CSS Animation Gallery - Explore the endless possibilities of modern CSS animation techniques</p>
+
+    <div class="nav-cards">
+      <a href="gallery-en.html" class="nav-card">
+        <div class="icon">🎨</div>
+        <h3>Animation Gallery</h3>
+        <p>Browse and experience CSS animation effects</p>
+      </a>
+      <a href="gallery.html" class="nav-card">
+        <div class="icon">🇨🇳</div>
+        <h3>中文版本</h3>
+        <p>浏览 CSS 动画画廊中文版</p>
+      </a>
+    </div>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">⚡</div>
+        <h4>Live Preview</h4>
+        <p>WYSIWYG animation showcase</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📋</div>
+        <h4>Copy Code</h4>
+        <p>One-click copy of complete code</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎯</div>
+        <h4>Pure CSS</h4>
+        <p>Works without JavaScript</p>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>Built with pure CSS & JavaScript</p>
+    </footer>
+  </div>
+</body>
+</html>

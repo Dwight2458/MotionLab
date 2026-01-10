@@ -1,19 +1,17 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en-US">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CSS 动画画廊</title>
+  <title>CSS Animation Gallery</title>
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/gallery.css">
   <style>
-    /* System font stack - no external fonts needed */
     :root {
       --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       --font-mono: 'SF Mono', 'Fira Code', Consolas, 'Liberation Mono', Menlo, monospace;
     }
 
-    /* Page specific styles */
     body {
       background: linear-gradient(135deg, #0a0a0f 0%, #12121a 100%);
       min-height: 100vh;
@@ -106,7 +104,6 @@
       margin-bottom: 16px;
     }
 
-    /* Code Toggle Button */
     .code-toggle {
       display: flex;
       align-items: center;
@@ -149,7 +146,6 @@
       color: #6366f1;
     }
 
-    /* Code Panel */
     .code-panel {
       max-height: 0;
       overflow: hidden;
@@ -176,7 +172,6 @@
       padding-top: 40px;
     }
 
-    /* Scrollbar for code panel */
     .code-panel.open::-webkit-scrollbar {
       width: 6px;
     }
@@ -243,18 +238,14 @@
   </style>
 </head>
 <body>
-  <!-- Canvas background -->
   <canvas id="bgCanvas"></canvas>
 
-  <!-- Page Header -->
   <header class="page-header">
-    <h1>CSS 动画画廊</h1>
-    <p>交互式 CSS 动画演示，实时预览代码效果。点击"查看代码"获取完整源码。</p>
+    <h1>CSS Animation Gallery</h1>
+    <p>Interactive CSS animation demonstrations with live code preview. Click "View Code" to see the complete source code.</p>
   </header>
 
-  <!-- Gallery Grid -->
   <main class="gallery-grid" id="galleryGrid">
-    <!-- Loading Spinner -->
     <div class="gallery-item" data-animation="loading">
       <div class="item-preview">
         <div class="demo-loading">
@@ -267,13 +258,13 @@
         </div>
       </div>
       <div class="item-info">
-        <h3 class="item-title">加载动画</h3>
-        <p class="item-desc">带有延迟效果的旋转圆环</p>
+        <h3 class="item-title">Loading Spinner</h3>
+        <p class="item-desc">Rotating rings with delay</p>
         <button class="code-toggle" data-target="loading">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
-          查看 CSS 代码
+          View CSS Code
         </button>
         <div class="code-panel" id="code-loading" data-html="<div class=&quot;loading-ring&quot;>
   <div></div>
@@ -305,9 +296,9 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }">
-          <button class="copy-btn" data-target="loading">复制完整代码</button>
+          <button class="copy-btn" data-target="loading">Copy Complete Code</button>
           <div class="code-content">
-<span class="comment">/* 加载动画 CSS */</span>
+<span class="comment">/* Loading Spinner CSS */</span>
 <span class="selector">.loading-ring</span> <span class="punctuation">{</span>
   <span class="property">position</span><span class="punctuation">:</span> <span class="value">relative</span><span class="punctuation">;</span>
   <span class="property">width</span><span class="punctuation">:</span> <span class="value">60px</span><span class="punctuation">;</span>
@@ -338,7 +329,6 @@
       </div>
     </div>
 
-    <!-- Pulse Button -->
     <div class="gallery-item" data-animation="pulse">
       <div class="item-preview">
         <button class="demo-pulse-btn">
@@ -346,13 +336,13 @@
         </button>
       </div>
       <div class="item-info">
-        <h3 class="item-title">脉冲按钮</h3>
-        <p class="item-desc">带有波纹效果的按钮</p>
+        <h3 class="item-title">Pulse Button</h3>
+        <p class="item-desc">Button with ripple effect</p>
         <button class="code-toggle" data-target="pulse">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
-          查看 CSS 代码
+          View CSS Code
         </button>
         <div class="code-panel" id="code-pulse" data-html="<button class=&quot;pulse-btn&quot;>
   <span>Hover Me</span>
@@ -386,9 +376,9 @@
     opacity: 0;
   }
 }">
-          <button class="copy-btn" data-target="pulse">复制完整代码</button>
+          <button class="copy-btn" data-target="pulse">Copy Complete Code</button>
           <div class="code-content">
-<span class="comment">/* 脉冲按钮 CSS */</span>
+<span class="comment">/* Pulse Button CSS */</span>
 <span class="selector">.pulse-btn</span> <span class="punctuation">{</span>
   <span class="property">position</span><span class="punctuation">:</span> <span class="value">relative</span><span class="punctuation">;</span>
   <span class="property">padding</span><span class="punctuation">:</span> <span class="value">12px 28px</span><span class="punctuation">;</span>
@@ -423,7 +413,6 @@
       </div>
     </div>
 
-    <!-- Flip Card -->
     <div class="gallery-item" data-animation="flip">
       <div class="item-preview">
         <div class="demo-flip">
@@ -436,13 +425,13 @@
         </div>
       </div>
       <div class="item-info">
-        <h3 class="item-title">3D 翻转卡片</h3>
-        <p class="item-desc">使用 preserve-3d 的 3D 变换效果</p>
+        <h3 class="item-title">3D Flip Card</h3>
+        <p class="item-desc">3D transform with preserve-3d</p>
         <button class="code-toggle" data-target="flip">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
-          查看 CSS 代码
+          View CSS Code
         </button>
         <div class="code-panel" id="code-flip" data-html="<div class=&quot;flip-card&quot;>
   <div class=&quot;flip-inner&quot;>
@@ -489,9 +478,9 @@
   color: white;
   transform: rotateY(180deg);
 }">
-          <button class="copy-btn" data-target="flip">复制完整代码</button>
+          <button class="copy-btn" data-target="flip">Copy Complete Code</button>
           <div class="code-content">
-<span class="comment">/* 3D 翻转卡片 CSS */</span>
+<span class="comment">/* 3D Flip Card CSS */</span>
 <span class="selector">.flip-card</span> <span class="punctuation">{</span>
   <span class="property">perspective</span><span class="punctuation">:</span> <span class="value">1000px</span><span class="punctuation">;</span>
   <span class="property">width</span><span class="punctuation">:</span> <span class="value">120px</span><span class="punctuation">;</span>
@@ -526,7 +515,6 @@
       </div>
     </div>
 
-    <!-- Glowing Text -->
     <div class="gallery-item" data-animation="glow">
       <div class="item-preview">
         <div class="demo-glow">
@@ -534,13 +522,13 @@
         </div>
       </div>
       <div class="item-info">
-        <h3 class="item-title">霓虹发光</h3>
-        <p class="item-desc">文字阴影动画效果</p>
+        <h3 class="item-title">Neon Glow</h3>
+        <p class="item-desc">Text shadow animation</p>
         <button class="code-toggle" data-target="glow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
-          查看 CSS 代码
+          View CSS Code
         </button>
         <div class="code-panel" id="code-glow" data-html="<span class=&quot;glow-text&quot;>CSS</span>" data-css=".glow-text {
   font-size: 2.5rem;
@@ -562,9 +550,9 @@
       0 0 60px #8b5cf6;
   }
 }">
-          <button class="copy-btn" data-target="glow">复制完整代码</button>
+          <button class="copy-btn" data-target="glow">Copy Complete Code</button>
           <div class="code-content">
-<span class="comment">/* 霓虹发光 CSS */</span>
+<span class="comment">/* Neon Glow CSS */</span>
 <span class="selector">.glow-text</span> <span class="punctuation">{</span>
   <span class="property">font-size</span><span class="punctuation">:</span> <span class="value">2.5rem</span><span class="punctuation">;</span>
   <span class="property">font-weight</span><span class="punctuation">:</span> <span class="value">700</span><span class="punctuation">;</span>
@@ -590,19 +578,18 @@
       </div>
     </div>
 
-    <!-- Morphing Blob -->
     <div class="gallery-item" data-animation="blob">
       <div class="item-preview">
         <div class="demo-blob"></div>
       </div>
       <div class="item-info">
-        <h3 class="item-title">变形Blob</h3>
-        <p class="item-desc">流畅的 border-radius 动画</p>
+        <h3 class="item-title">Morphing Blob</h3>
+        <p class="item-desc">Fluid border-radius animation</p>
         <button class="code-toggle" data-target="blob">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
-          查看 CSS 代码
+          View CSS Code
         </button>
         <div class="code-panel" id="code-blob" data-html="<div class=&quot;demo-blob&quot;></div>" data-css=".demo-blob {
   width: 100px;
@@ -619,9 +606,9 @@
     border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
   }
 }">
-          <button class="copy-btn" data-target="blob">复制完整代码</button>
+          <button class="copy-btn" data-target="blob">Copy Complete Code</button>
           <div class="code-content">
-<span class="comment">/* 变形Blob CSS */</span>
+<span class="comment">/* Morphing Blob CSS */</span>
 <span class="selector">.demo-blob</span> <span class="punctuation">{</span>
   <span class="property">width</span><span class="punctuation">:</span> <span class="value">100px</span><span class="punctuation">;</span>
   <span class="property">height</span><span class="punctuation">:</span> <span class="value">100px</span><span class="punctuation">;</span>
@@ -644,19 +631,18 @@
       </div>
     </div>
 
-    <!-- Bounce -->
     <div class="gallery-item" data-animation="bounce">
       <div class="item-preview">
         <div class="demo-bounce"></div>
       </div>
       <div class="item-info">
-        <h3 class="item-title">弹性弹跳</h3>
-        <p class="item-desc">具有弹性的跳动效果</p>
+        <h3 class="item-title">Bounce</h3>
+        <p class="item-desc">Elastic bounce effect</p>
         <button class="code-toggle" data-target="bounce">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
-          查看 CSS 代码
+          View CSS Code
         </button>
         <div class="code-panel" id="code-bounce" data-html="<div class=&quot;demo-bounce&quot;></div>" data-css=".demo-bounce {
   width: 60px;
@@ -670,9 +656,9 @@
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-30px); }
 }">
-          <button class="copy-btn" data-target="bounce">复制完整代码</button>
+          <button class="copy-btn" data-target="bounce">Copy Complete Code</button>
           <div class="code-content">
-<span class="comment">/* 弹性弹跳 CSS */</span>
+<span class="comment">/* Bounce CSS */</span>
 <span class="selector">.demo-bounce</span> <span class="punctuation">{</span>
   <span class="property">width</span><span class="punctuation">:</span> <span class="value">60px</span><span class="punctuation">;</span>
   <span class="property">height</span><span class="punctuation">:</span> <span class="value">60px</span><span class="punctuation">;</span>
@@ -690,7 +676,6 @@
       </div>
     </div>
 
-    <!-- Wave -->
     <div class="gallery-item" data-animation="wave">
       <div class="item-preview">
         <div class="demo-wave">
@@ -698,13 +683,13 @@
         </div>
       </div>
       <div class="item-info">
-        <h3 class="item-title">波浪加载器</h3>
-        <p class="item-desc">错落的圆点动画</p>
+        <h3 class="item-title">Wave Loader</h3>
+        <p class="item-desc">Staggered dots animation</p>
         <button class="code-toggle" data-target="wave">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
-          查看 CSS 代码
+          View CSS Code
         </button>
         <div class="code-panel" id="code-wave" data-html="<div class=&quot;demo-wave&quot;>
   <span></span>
@@ -741,9 +726,9 @@
     opacity: 1;
   }
 }">
-          <button class="copy-btn" data-target="wave">复制完整代码</button>
+          <button class="copy-btn" data-target="wave">Copy Complete Code</button>
           <div class="code-content">
-<span class="comment">/* 波浪加载器 CSS */</span>
+<span class="comment">/* Wave Loader CSS */</span>
 <span class="selector">.demo-wave</span> <span class="punctuation">{</span>
   <span class="property">display</span><span class="punctuation">:</span> <span class="value">flex</span><span class="punctuation">;</span>
   <span class="property">gap</span><span class="punctuation">:</span> <span class="value">6px</span><span class="punctuation">;</span>
@@ -778,7 +763,6 @@
       </div>
     </div>
 
-    <!-- Heartbeat -->
     <div class="gallery-item" data-animation="heart">
       <div class="item-preview">
         <div class="demo-heart">
@@ -794,13 +778,13 @@
         </div>
       </div>
       <div class="item-info">
-        <h3 class="item-title">心跳动画</h3>
-        <p class="item-desc">有节奏的缩放效果</p>
+        <h3 class="item-title">Heartbeat</h3>
+        <p class="item-desc">Rhythmic scaling</p>
         <button class="code-toggle" data-target="heart">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
-          查看 CSS 代码
+          View CSS Code
         </button>
         <div class="code-panel" id="code-heart" data-html="<div class=&quot;demo-heart&quot;>
   <svg viewBox=&quot;0 0 24 24&quot; width=&quot;48&quot; height=&quot;48&quot;>
@@ -819,9 +803,9 @@
   45% { transform: scale(1.15); }
   60% { transform: scale(1); }
 }">
-          <button class="copy-btn" data-target="heart">复制完整代码</button>
+          <button class="copy-btn" data-target="heart">Copy Complete Code</button>
           <div class="code-content">
-<span class="comment">/* 心跳动画 CSS */</span>
+<span class="comment">/* Heartbeat CSS */</span>
 <span class="selector">.demo-heart</span> <span class="punctuation">{</span>
   <span class="property">width</span><span class="punctuation">:</span> <span class="value">48px</span><span class="punctuation">;</span>
   <span class="property">height</span><span class="punctuation">:</span> <span class="value">48px</span><span class="punctuation">;</span>
@@ -843,19 +827,16 @@
 
   <script src="scripts/gallery.js"></script>
   <script>
-    // Code toggle functionality
     document.querySelectorAll('.code-toggle').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent event bubbling
+        e.stopPropagation();
         const target = btn.dataset.target;
         const panel = document.getElementById('code-' + target);
         const isOpen = panel.classList.contains('open');
 
-        // Close all panels
         document.querySelectorAll('.code-panel').forEach(p => p.classList.remove('open'));
         document.querySelectorAll('.code-toggle').forEach(b => b.classList.remove('active'));
 
-        // Open target panel if it was closed
         if (!isOpen) {
           panel.classList.add('open');
           btn.classList.add('active');
@@ -863,7 +844,6 @@
       });
     });
 
-    // Close panel when clicking outside
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.code-toggle') && !e.target.closest('.code-panel')) {
         document.querySelectorAll('.code-panel').forEach(p => p.classList.remove('open'));
@@ -871,31 +851,27 @@
       }
     });
 
-    // Prevent clicks inside the panel from closing it
     document.querySelectorAll('.code-panel').forEach(panel => {
       panel.addEventListener('click', (e) => {
         e.stopPropagation();
       });
     });
 
-    // Copy code functionality - generates complete HTML file
     document.querySelectorAll('.copy-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const target = btn.dataset.target;
         const panel = document.getElementById('code-' + target);
 
-        // Get raw code from data attributes
         const htmlCode = panel.dataset.html || '';
         const cssCode = panel.dataset.css || '';
 
-        // Generate complete HTML template
         const template = `<!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en-US">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CSS 动画演示</title>
+  <title>CSS Animation Demo</title>
   <style>
     body {
       display: flex;
@@ -914,20 +890,17 @@ ${htmlCode}
 </body>
 </html>`;
 
-        // Copy to clipboard
         navigator.clipboard.writeText(template).then(() => {
-          // Visual feedback
-          btn.textContent = '已复制';
+          btn.textContent = 'Copied';
           btn.classList.add('copied');
 
-          // Reset after 2 seconds
           setTimeout(() => {
-            btn.textContent = '复制完整代码';
+            btn.textContent = 'Copy';
             btn.classList.remove('copied');
           }, 2000);
         }).catch(err => {
           console.error('Failed to copy:', err);
-          btn.textContent = '复制失败';
+          btn.textContent = 'Failed';
         });
       });
     });
