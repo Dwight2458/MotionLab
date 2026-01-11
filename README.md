@@ -1,70 +1,70 @@
-# MotionLab - CSS Animation Gallery
+# MotionLab - CSS 动画画廊
 
-An interactive showcase of CSS animations demonstrating event-driven UI patterns with real-time code previews.
+一个展示 CSS 动画技术的交互式画廊，演示事件驱动的 UI 模式与实时代码预览。
 
-## Overview
+## 概述
 
-This project explores modern CSS animation techniques through an interactive gallery. It serves as both an educational tool for learning CSS animations and a demonstration of event-driven UI patterns in vanilla JavaScript.
+本项目通过交互式画廊探索现代 CSS 动画技术。它既是一个学习 CSS 动画的教育工具，也是展示 Vanilla JavaScript 事件驱动 UI 模式的演示项目。
 
-## Features
+## 功能特性
 
-- **Interactive Animation Gallery** - 8+ CSS animation demos with live previews
-- **Real-time Code Playground** - Type-safe CSS code execution with progress visualization
-- **Canvas Particle Background** - Dynamic floating particle network effect
-- **Theme System** - Dark/light mode with localStorage persistence
-- **Responsive Design** - Fluid layouts adapting to all screen sizes
-- **Smooth Transitions** - Polished hover effects and micro-interactions
+- **交互式动画画廊** - 8+ CSS 动画演示，支持实时预览
+- **实时代码演练场** - 带进度可视化的 CSS 代码执行
+- **Canvas 粒子背景** - 动态漂浮粒子网络效果
+- **主题系统** - 深色/浅色模式，支持 localStorage 持久化
+- **响应式设计** - 适配所有屏幕尺寸的流体布局
+- **流畅过渡** - 精致的悬停效果和微交互
 
-## Animations Included
+## 动画演示
 
-| Demo | Technique |
-|------|-----------|
-| Loading Spinner | Ring borders with staggered delays |
-| Pulse Button | `::before` pseudo-element with transform |
-| 3D Flip Card | `transform: rotateY()` + `preserve-3d` |
-| Neon Glow | Animated `text-shadow` |
-| Morphing Blob | Dynamic `border-radius` values |
-| Bounce | `translateY` keyframe animation |
-| Wave Loader | Staggered `nth-child` delays |
-| Heartbeat | Multi-step scale keyframes |
+| 演示 | 技术要点 |
+|------|----------|
+| 加载旋转器 | 环形边框 + 交错延迟 |
+| 脉冲按钮 | `::before` 伪元素 + transform |
+| 3D 翻转卡片 | `transform: rotateY()` + `preserve-3d` |
+| 霓虹发光 | 动态 `text-shadow` |
+| 变形Blob | 变化的 `border-radius` 值 |
+| 弹跳效果 | `translateY` 关键帧动画 |
+| 波浪加载器 | `nth-child` 交错延迟 |
+| 心跳效果 | 多步 scale 关键帧 |
 
-## Tech Stack
+## 技术栈
 
-### Core
+### 核心
 
-- **HTML5** - Semantic markup
-- **CSS3** - Custom properties, Grid, Keyframes, Transforms
-- **JavaScript (ES6+)** - DOM manipulation, Canvas API
+- **HTML5** - 语义化标签
+- **CSS3** - 自定义属性、CSS Grid、Keyframes、Transforms
+- **JavaScript (ES6+)** - DOM 操作、Canvas API
 
-### Optional
+### 可选
 
-- **React** - `react-grid-layout` for draggable grid (gallery-app.jsx)
+- **React** - `react-grid-layout` 用于可拖拽网格 (gallery-app.jsx)
 
-### Fonts
+### 字体
 
-- **Inter** - UI typography
-- **JetBrains Mono** - Code display
+- **Inter** - UI 排版
+- **JetBrains Mono** - 代码显示
 
-## Project Structure
+## 项目结构
 
 ```
 motionlab/
-├── gallery.html              # Main entry point
-├── screenshots/              # Project visuals
+├── gallery.html              # 主入口文件
+├── screenshots/              # 项目截图
 ├── scripts/
-│   ├── main.js              # Interactive demo system
-│   ├── gallery.js           # Canvas particle background
-│   ├── base.js              # Theme, cursor, navigation
-│   └── gallery-app.jsx      # React draggable grid
+│   ├── main.js              # 交互式演示系统
+│   ├── gallery.js           # Canvas 粒子背景
+│   ├── base.js              # 主题、光标、导航
+│   └── gallery-app.jsx      # React 可拖拽网格
 └── styles/
-    ├── main.css             # Core styles & animations
-    └── gallery.css          # Gallery components
+    ├── main.css             # 核心样式与动画
+    └── gallery.css          # 画廊组件样式
 ```
 
-## Quick Start
+## 快速开始
 
-Open `gallery.html` in any modern browser. No build step required for vanilla JS version.
+在现代浏览器中打开 `gallery.html`。Vanilla JS 版本无需构建步骤。
 
-## License
+## 开源协议
 
 MIT

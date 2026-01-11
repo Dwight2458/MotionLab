@@ -141,6 +141,24 @@
       font-size: 0.85rem;
     }
 
+    .github-link {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 100;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .github-link:hover {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+
+    .github-link img {
+      height: 28px;
+      border-radius: 4px;
+    }
+
     @media (max-width: 600px) {
       .nav-cards {
         flex-direction: column;
@@ -191,6 +209,11 @@
     <footer class="footer">
       <p>Built with pure CSS & JavaScript</p>
     </footer>
+
+    <!-- GitHub Link -->
+    <a href="https://github.com/Dwight2458/MotionLab" class="github-link" target="_blank" rel="noopener noreferrer" aria-label="View on GitHub">
+      <img alt="Static Badge" src="https://img.shields.io/badge/github-repo-blue?logo=github">
+    </a>
   </div>
 </body>
 </html>
