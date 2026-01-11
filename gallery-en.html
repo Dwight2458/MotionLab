@@ -905,5 +905,30 @@ ${htmlCode}
       });
     });
   </script>
+
+  <style>
+    .github-link {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 100;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .github-link:hover {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+
+    .github-link img {
+      height: 28px;
+      border-radius: 4px;
+    }
+  </style>
+
+  <!-- GitHub Link -->
+  <a href="https://github.com/Dwight2458/MotionLab" class="github-link" target="_blank" rel="noopener noreferrer" aria-label="View on GitHub">
+    <img alt="Static Badge" src="https://img.shields.io/badge/github-repo-blue?logo=github">
+  </a>
 </body>
 </html>
